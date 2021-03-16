@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li> <a href="/myCollection">myCollection</a> </li>
+            </ul>
+
+        </nav>
+    </header>
+    <main>
+        <section>
+            <% data.forEach(element=>{ %>
+                <div>
+                    <h1>name:
+                        <%= element.name %>
+                    </h1>
+                    <img src="<%= element.img %>" alt="<%= element.name %>">
+                    <h2>level:
+                        <%= element.level %>
+                    </h2>
+                    <form action="/details/<%= element.id %>?_method=DELETE" method="post"><button type="submit">Delete</button></form>
+                    <button type="submit" class="updateButton">Update</button>
+                    <form action="/details/<%= element.id %>?_method=PUT" method="post" class="updateForm">
+                        <input type="text" name="name" value="<%= element.name %>">
+                        <input type="text" name="img" value="<%= element.img %>">
+                        <input type="text" name="level" value="<%= element.level %>">
+                        <button type="submit">Update Now</button>
+                    </form>
+
+
+                </div>
+
+                <% }) %>
+        </section>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('.updateForm').hide();
+        $('.updateButton').on('click', function() {
+            $('.updateForm , .updateButton ').toggle();
+        })
+    </script>
+</body>
+
+</html>
